@@ -25,7 +25,7 @@ jobs:
       run: mkdir output && cp target/demo-0.0.1-SNAPSHOT.jar output/
 
     - name: Upload JAR as Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: demo-app
         path: output/demo-0.0.1-SNAPSHOT.jar
@@ -36,7 +36,7 @@ jobs:
 
     steps:
     - name: Download Artifact
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: demo-app
 
