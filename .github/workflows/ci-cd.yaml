@@ -45,6 +45,11 @@ jobs:
         echo "$SSH_PRIVATE_KEY" > key.pem
         chmod 400 key.pem
         scp -o StrictHostKeyChecking=no -i key.pem demo-0.0.1-SNAPSHOT.jar ubuntu@13.232.230.252:/home/ubuntu/demo.jar
-        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@13.232.230.252 'nohup java -jar demo.jar > output.log 2>&1 &'
+        ssh -o StrictHostKeyChecking=no -i key.pem ubuntu@13.232.230.252 << 'EOF'
+          echo "🔁 Stopping existing demo.jar (if running)..."
+          pkill -f demo.jar || true
+          echo "🚀 Starting new demo.jar..."
+          nohup java -jar demo.jar > output.log 2>&1 &
+        EOF
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}  
+        SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
