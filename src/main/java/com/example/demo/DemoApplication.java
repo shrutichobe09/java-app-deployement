@@ -14,6 +14,6 @@ public class DemoApplication {
 
     @GetMapping("/")
     public String hello() {
-        return "Hello from GitHub Actions!";
+        return "Hello from GitHub Actions by shruti chobe !";
     }
 }
